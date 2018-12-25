@@ -28,6 +28,7 @@ class Bondora:
 			help_lib.printInfo('Logged in')
 		else:
 			help_lib.printError('Login Failed')
+			self.s = None
 
 
 	#Invested Funds

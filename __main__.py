@@ -41,10 +41,14 @@ if('MINTOS' in config):
 	mintos_mail =	config['MINTOS']['MAIL']
 	mintos_pw =		config['MINTOS']['PW']
 	mint = mintos.Mintos(mintos_mail, mintos_pw)
+	if(mint.s == None):
+		mint = None
 if('BONDORA' in config):
 	bondora_mail =	config['BONDORA']['MAIL']
 	bondora_pw =	config['BONDORA']['PW']
 	bond = bondora.Bondora(bondora_mail, bondora_pw)
+	if(bond.s == None):
+		bond = None
 
 if(mint and bond):
 	print('===================================================')
