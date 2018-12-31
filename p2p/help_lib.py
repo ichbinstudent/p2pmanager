@@ -1,4 +1,5 @@
 def printInfo(s):
+	return
 	print("[+]\t" + s)
 
 def printError(s):

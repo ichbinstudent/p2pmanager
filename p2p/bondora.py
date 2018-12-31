@@ -1,6 +1,6 @@
 # coding: utf8
 import requests
-import help_lib
+import p2p.help_lib as help_lib
 
 class Bondora:
 	def __init__(self, mail, pw):
@@ -41,25 +41,27 @@ class Bondora:
 
 	#Account value
 	def AccountValue(self):
-		r = self.s.get('https://www.bondora.com/de/dashboard/overviewnumbers/')
-		return float(r.json()['Stats'][0]['ValueTooltip'][0:-1].replace(',','.'))
+		r = self.s.get('https://www.bondora.com/en/dashboard/overviewnumbers/')
+		return float(r.json()['Stats'][0]['ValueTooltip'][0:-1])
 
 	#Lifetime net profit
 	def LifetimeNetProfit(self):
-		r = self.s.get('https://www.bondora.com/de/dashboard/overviewnumbers/')
-		return float(r.json()['Stats'][1]['ValueTooltip'][0:-1].replace(',','.'))
+		r = self.s.get('https://www.bondora.com/en/dashboard/overviewnumbers/')
+		return float(r.json()['Stats'][1]['ValueTooltip'][0:-1])
 
 	#Yield to maturity
 	def YieldToMaturity(self):
-		r = self.s.get('https://www.bondora.com/de/dashboard/overviewnumbers/')
-		return float(r.json()['Stats'][2]['Value'][0:-1].replace(',','.'))
+		r = self.s.get('https://www.bondora.com/en/dashboard/overviewnumbers/')
+		if(r.json()['Stats'][2]['Value'][0:-1] == ''):
+			return 0
+		return float(r.json()['Stats'][2]['Value'][0:-1])
 
 	#Lifetime portfolio value
 	def LifetimePortfolioValue(self):
-		r = self.s.get('https://www.bondora.com/de/dashboard/overviewnumbers/')
-		return float(r.json()['Stats'][3]['ValueTooltip'][0:-1].replace(',','.'))
+		r = self.s.get('https://www.bondora.com/en/dashboard/overviewnumbers/')
+		return float(r.json()['Stats'][3]['ValueTooltip'][0:-1])
 
 	#Available funds
 	def AvailableFunds(self):
-		r = self.s.get('https://www.bondora.com/de/dashboard/overviewnumbers/')
-		return float(r.json()['Stats'][4]['ValueTooltip'][0:-1].replace(',','.'))
+		r = self.s.get('https://www.bondora.com/en/dashboard/overviewnumbers/')
+		return float(r.json()['Stats'][4]['ValueTooltip'][0:-1])

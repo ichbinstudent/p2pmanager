@@ -1,6 +1,6 @@
 # coding: utf8
 import requests
-import help_lib
+import p2p.help_lib as help_lib
 
 class Mintos:
 	def __init__(self, mail, pw):
