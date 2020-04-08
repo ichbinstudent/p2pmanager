@@ -3,15 +3,19 @@ import requests
 import p2p.help_lib as help_lib
 
 class Mintos:
+
+	base_url = 'https://www.mintos.com/en/'
+
 	def __init__(self, mail, pw):
 		self.s = requests.Session()
-		url = "https://www.mintos.com/en/"
-		verTokenMatch = '<input type="hidden" name="_csrf_token" value="'
+		self.s.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:73.0) Gecko/20100101 Firefox/73.0'
+		url = self.base_url + 'login'
+		verTokenMatch = 'name="_csrf_token" type="hidden" value="'
 		
 		r = self.s.get(url)
 		init = r.text
 		start = init.find(verTokenMatch) + len(verTokenMatch)
-		verToken=init[start: init.find('"/>',start)]
+		verToken = init[start: init.find('">', start)]
 		
 		data = {
 			'_csrf_token':	verToken,
@@ -19,13 +23,13 @@ class Mintos:
 			'_password':	pw
 		}
 		
-		url = 'https://www.mintos.com/en/login/check'
+		url = self.base_url + 'login/check'
 		r = self.s.post(url, data=data)
 		
 		if('overview' in r.url):
 			help_lib.printInfo('Logged in')
 		else:
-			help_lib.printError(r.content)
+			help_lib.printError(r.text)
 
 	#Total Account Balance
 	def TotalAmount(self):
